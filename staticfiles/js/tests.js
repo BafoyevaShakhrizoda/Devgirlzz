@@ -7,10 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const progressText = document.getElementById('progress-text');
     let currentQuestion = 0;
     
-    // Initialize progress
     updateProgress();
     
-    // Next button click
     nextBtn.addEventListener('click', function() {
         if (validateCurrentQuestion()) {
             questions[currentQuestion].classList.remove('active');
@@ -27,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Previous button click
     prevBtn.addEventListener('click', function() {
         questions[currentQuestion].classList.remove('active');
         questions[currentQuestion].classList.add('hidden');
@@ -40,14 +37,12 @@ document.addEventListener('DOMContentLoaded', function() {
         updateProgress();
     });
     
-    // Validate current question has an answer
     function validateCurrentQuestion() {
         const currentQuestionId = questions[currentQuestion].dataset.questionId;
         const selectedOption = document.querySelector(`input[name="question_${currentQuestionId}"]:checked`);
         return selectedOption !== null;
     }
     
-    // Update navigation buttons
     function updateNavigation() {
         if (currentQuestion === 0) {
             prevBtn.disabled = true;
@@ -64,26 +59,22 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Update progress bar and text
     function updateProgress() {
         const progress = ((currentQuestion + 1) / questions.length) * 100;
         document.querySelector('.progress-bar').style.setProperty('--progress', `${progress}%`);
         progressText.textContent = `${currentQuestion + 1}/${questions.length}`;
     }
     
-    // Style options on selection
     const options = document.querySelectorAll('.option');
     options.forEach(option => {
         option.addEventListener('click', function() {
             const input = this.querySelector('input');
             input.checked = true;
             
-            // Remove selected class from all options
             options.forEach(opt => {
                 opt.classList.remove('selected');
             });
             
-            // Add selected class to current option
             this.classList.add('selected');
         });
     });

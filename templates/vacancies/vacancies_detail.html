@@ -284,13 +284,11 @@
 {% block scripts %}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Apply button functionality
         const applyBtn = document.querySelector('.apply-btn');
         if (applyBtn) {
             applyBtn.addEventListener('click', function() {
                 this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Jo\'natilmoqda...';
                 
-                // Simulate application process
                 setTimeout(() => {
                     this.innerHTML = '<i class="fas fa-check"></i> Ariza Jo\'natildi!';
                     this.classList.remove('btn-primary');

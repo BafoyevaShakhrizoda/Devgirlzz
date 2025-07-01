@@ -297,13 +297,11 @@
 {% block scripts %}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Download CV button
         const downloadBtn = document.getElementById('download-cv');
         if (downloadBtn) {
             downloadBtn.addEventListener('click', function() {
                 this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Tayyorlanmoqda...';
                 
-                // Simulate download process
                 setTimeout(() => {
                     this.innerHTML = '<i class="fas fa-check"></i> Yuklab Olindi!';
                     setTimeout(() => {

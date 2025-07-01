@@ -1,4 +1,3 @@
-// Portfolio link toggle
 document.addEventListener('DOMContentLoaded', function() {
     const portfolioCheckbox = document.getElementById('has_portfolio');
     const portfolioLinkField = document.querySelector('.portfolio-link');
@@ -13,13 +12,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Form validation
     const forms = document.querySelectorAll('form');
     forms.forEach(form => {
         form.addEventListener('submit', function(e) {
             let isValid = true;
             
-            // Check required fields
             const requiredInputs = this.querySelectorAll('input[required]');
             requiredInputs.forEach(input => {
                 if (!input.value.trim()) {
@@ -30,7 +27,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
             
-            // Check password match
             const password1 = this.querySelector('#password1');
             const password2 = this.querySelector('#password2');
             

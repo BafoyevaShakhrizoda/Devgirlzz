@@ -1,4 +1,3 @@
-// Mobile navigation
 const burger = document.querySelector('.burger');
 const navLinks = document.querySelector('.nav-links');
 const navLinksItems = document.querySelectorAll('.nav-links li');
@@ -15,7 +14,6 @@ navLinksItems.forEach(item => {
     });
 });
 
-// Smooth scrolling for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         e.preventDefault();
@@ -33,7 +31,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Scroll reveal animation
 function scrollReveal() {
     const elements = document.querySelectorAll('.animate-on-scroll');
     

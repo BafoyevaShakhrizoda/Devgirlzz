@@ -1,4 +1,3 @@
-// Scroll animations
 document.addEventListener('DOMContentLoaded', function() {
     const animateElements = document.querySelectorAll('.animate-on-scroll');
     
@@ -16,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('scroll', checkScroll);
     window.addEventListener('load', checkScroll);
     
-    // Button ripple effect
     const buttons = document.querySelectorAll('.btn-primary, .btn-secondary, .btn-success');
     
     buttons.forEach(button => {
@@ -37,7 +35,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 ripple.remove();
             }, 1000);
             
-            // If it's a link, follow it after animation
             if (this.tagName === 'A') {
                 setTimeout(() => {
                     window.location.href = this.href;
@@ -46,7 +43,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Hover animations for cards
     const cards = document.querySelectorAll('.category-card, .step, .vacancy-card');
     
     cards.forEach(card => {
@@ -59,7 +55,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Loading animation for form submission
     const forms = document.querySelectorAll('form');
     
     forms.forEach(form => {

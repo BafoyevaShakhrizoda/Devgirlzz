@@ -1,4 +1,3 @@
-/* Additional animations */
 @keyframes pulse {
     0% { transform: scale(1); }
     50% { transform: scale(1.05); }
@@ -19,7 +18,6 @@
     animation: bounce 2s infinite;
 }
 
-/* Button hover effects */
 .btn-primary, .btn-secondary, .btn-success {
     position: relative;
     overflow: hidden;
@@ -54,7 +52,6 @@
     }
 }
 
-/* Card hover effects */
 .category-card, .step {
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
@@ -63,7 +60,6 @@
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.08);
 }
 
-/* Loading animation */
 .loading-spinner {
     display: inline-block;
     width: 40px;
