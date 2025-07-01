@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="test-container">
+    <div class="test-header">
+        <h1>{{ category.name }} Testi</h1>
+        <p>Testni ishlab bo'lgach, bilim darajangiz aniqlanadi va sizga mos CV tayyorlanadi</p>
+    </div>
+    
+    <form id="test-form" method="post">
+        {% csrf_token %}
+        <div class="test-progress">
+            <div class="progress-bar" id="progress-bar"></div>
+            <span id="progress-text">1/{{ questions|length }}</span>
+        </div>
+        
+        <div class="questions-container">
+            {% for question in questions %}
+            <div class="question-card {% if forloop.first %}active{% else %}hidden{% endif %}" data-question-id="{{ question.id }}">
+                <h3 class="question-text">{{ question.text }}</h3>
+                <div class="options-container">
+                    {% for option in question.options %}
+                    <div class="option">
+                        <input type="radio" name="question_{{ question.id }}" id="option_{{ question.id }}_{{ forloop.counter }}" value="{{ option.value }}">
+                        <label for="option_{{ question.id }}_{{ forloop.counter }}">{{ option.text }}</label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="test-navigation">
+            <button type="button" class="btn-secondary" id="prev-btn" disabled>Oldingi</button>
+            <button type="button" class="btn-primary" id="next-btn">Keyingi</button>
+            <button type="submit" class="btn-success hidden" id="submit-btn">Yakunlash</button>
+        </div>
+    </form>
+</div>
+
+{% block scripts %}
+<script src="{% static 'js/tests.js' %}"></script>
+{% endblock %}
+{% endblock %}

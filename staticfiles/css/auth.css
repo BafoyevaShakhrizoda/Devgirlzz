@@ -1,0 +1,129 @@
+.auth-container {
+    background-color: var(--light-color);
+    min-height: calc(100vh - 80px);
+    padding: 2rem 0;
+}
+
+.auth-card {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(255, 107, 129, 0.1);
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.auth-card h2 {
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+}
+
+.auth-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.auth-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--dark-color);
+    font-weight: 600;
+}
+
+.auth-form input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.auth-form input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(255, 107, 129, 0.2);
+    outline: none;
+}
+
+.auth-form input.error {
+    border-color: #ff4757;
+}
+
+.portfolio-check {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.portfolio-check label {
+    margin-bottom: 0;
+    margin-right: 10px;
+    color: var(--text-color);
+    font-weight: normal;
+}
+
+.portfolio-link {
+    display: none;
+}
+
+.portfolio-link.show {
+    display: block;
+}
+
+.auth-link {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: var(--text-color);
+}
+
+.auth-link a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.auth-link a:hover {
+    text-decoration: underline;
+}
+
+.password-requirements {
+    font-size: 0.8rem;
+    color: var(--text-color);
+    margin-top: 0.5rem;
+}
+
+.social-auth {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.social-auth p {
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: white;
+    border: 1px solid #e0e0e0;
+    color: var(--text-color);
+    transition: all 0.3s;
+}
+
+.social-btn:hover {
+    background-color: var(--light-color);
+    transform: translateY(-3px);
+}

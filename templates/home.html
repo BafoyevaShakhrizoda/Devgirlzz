@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="hero-content">
+        <h1 class="hero-title animate-fadeIn">O'z karerangni biz bilan boshlang</h1>
+        <p class="hero-subtitle animate-fadeIn delay-1">IT sohasida o'z o'rnini topgan ayollardan bo'ling</p>
+        <a href="#categories" class="btn-primary animate-fadeIn delay-2">Boshlash</a>
+    </div>
+</div>
+
+<section id="categories" class="categories-section">
+    <h2 class="section-title">Kategoriyalar</h2>
+    <div class="categories-grid">
+        {% for category in categories %}
+        <div class="category-card animate-slideUp">
+            <div class="category-icon">
+                <i class="{{ category.icon }}"></i>
+            </div>
+            <h3>{{ category.name }}</h3>
+            <p>{{ category.description }}</p>
+            <a href="{% url 'category_tests' category.id %}" class="btn-secondary">Testni boshlash</a>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section id="how-it-works" class="steps-section">
+    <h2 class="section-title">Platforma qanday ishlaydi?</h2>
+    <div class="steps-container">
+        <div class="step animate-slideLeft">
+            <div class="step-number">1</div>
+            <h3>Kategoriyani tanlang</h3>
+            <p>O'zingizga qiziq bo'lgan IT sohasini tanlang</p>
+        </div>
+        <div class="step animate-slideLeft delay-1">
+            <div class="step-number">2</div>
+            <h3>Testni ishlang</h3>
+            <p>Bilim darajangizni aniqlash uchun testni bajaring</p>
+        </div>
+        <div class="step animate-slideLeft delay-2">
+            <div class="step-number">3</div>
+            <h3>Natijalarni oling</h3>
+            <p>Platforma sizga CV va vakansiyalarni taklif qiladi</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

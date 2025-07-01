@@ -1,0 +1,305 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="vacancy-detail-container">
+    <div class="vacancy-header">
+        <div class="company-logo">
+            <img src="{{ vacancy.company.logo.url }}" alt="{{ vacancy.company.name }}">
+        </div>
+        <div class="vacancy-title">
+            <h1>{{ vacancy.title }}</h1>
+            <p class="company-name">{{ vacancy.company.name }}</p>
+            <div class="vacancy-meta">
+                <span class="location"><i class="fas fa-map-marker-alt"></i> {{ vacancy.location }}</span>
+                <span class="type"><i class="fas fa-briefcase"></i> {{ vacancy.get_type_display }}</span>
+                <span class="salary"><i class="fas fa-money-bill-wave"></i> {{ vacancy.salary }}</span>
+                <span class="date"><i class="fas fa-calendar-alt"></i> {{ vacancy.posted_date|date:"d.m.Y" }}</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="vacancy-content">
+        <div class="vacancy-description">
+            <h2>Tavsif</h2>
+            <div class="description-text">
+                {{ vacancy.description|linebreaks }}
+            </div>
+            
+            <h2>Vazifalar</h2>
+            <ul class="responsibilities">
+                {% for responsibility in vacancy.responsibilities.all %}
+                <li>{{ responsibility.text }}</li>
+                {% endfor %}
+            </ul>
+            
+            <h2>Talablar</h2>
+            <ul class="requirements">
+                {% for requirement in vacancy.requirements.all %}
+                <li>{{ requirement.text }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <div class="vacancy-sidebar">
+            <div class="apply-card">
+                <h3>Ariza topshirish</h3>
+                <p>Ushbu vakansiyaga ariza topshirish uchun quyidagi tugmani bosing</p>
+                <button class="btn-primary apply-btn">Ariza Yuborish</button>
+                <p class="deadline">Oxirgi muddat: {{ vacancy.deadline|date:"d.m.Y" }}</p>
+            </div>
+            
+            <div class="company-card">
+                <h3>Kompaniya haqida</h3>
+                <div class="company-info">
+                    <div class="info-item">
+                        <span class="info-label">Sanoat:</span>
+                        <span class="info-value">{{ vacancy.company.industry }}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Ishchilar soni:</span>
+                        <span class="info-value">{{ vacancy.company.employee_count }}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-label">Vebsayt:</span>
+                        <a href="{{ vacancy.company.website }}" class="info-value">{{ vacancy.company.website }}</a>
+                    </div>
+                </div>
+                <p class="company-description">{{ vacancy.company.description }}</p>
+            </div>
+            
+            <div class="similar-vacancies">
+                <h3>O'xshash vakansiyalar</h3>
+                <div class="similar-list">
+                    {% for similar_vacancy in similar_vacancies %}
+                    <div class="similar-item">
+                        <h4>{{ similar_vacancy.title }}</h4>
+                        <p class="company">{{ similar_vacancy.company.name }}</p>
+                        <a href="{% url 'vacancy_detail' similar_vacancy.id %}" class="view-link">Ko'rish</a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .vacancy-detail-container {
+        max-width: 1200px;
+        margin: 100px auto 50px;
+        padding: 2rem;
+    }
+    
+    .vacancy-header {
+        display: flex;
+        align-items: center;
+        background-color: white;
+        border-radius: 15px;
+        padding: 2rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        margin-bottom: 2rem;
+    }
+    
+    .company-logo {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 1px solid #f1f2f6;
+        flex-shrink: 0;
+    }
+    
+    .company-logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+    
+    .vacancy-title {
+        margin-left: 2rem;
+    }
+    
+    .vacancy-title h1 {
+        color: var(--dark-color);
+        margin-bottom: 0.5rem;
+    }
+    
+    .company-name {
+        color: var(--primary-color);
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+    
+    .vacancy-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        color: var(--text-color);
+    }
+    
+    .vacancy-meta i {
+        margin-right: 5px;
+        color: var(--primary-color);
+    }
+    
+    .vacancy-content {
+        display: flex;
+        gap: 2rem;
+    }
+    
+    .vacancy-description {
+        flex: 2;
+        background-color: white;
+        border-radius: 15px;
+        padding: 2rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .vacancy-description h2 {
+        color: var(--primary-color);
+        margin: 1.5rem 0 1rem;
+        font-size: 1.3rem;
+    }
+    
+    .description-text {
+        color: var(--text-color);
+        line-height: 1.8;
+    }
+    
+    .responsibilities, .requirements {
+        list-style-type: none;
+        margin-left: 1rem;
+    }
+    
+    .responsibilities li, .requirements li {
+        padding: 0.5rem 0;
+        color: var(--text-color);
+        position: relative;
+        padding-left: 1.5rem;
+    }
+    
+    .responsibilities li::before, .requirements li::before {
+        content: '•';
+        color: var(--primary-color);
+        font-size: 1.5rem;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    
+    .vacancy-sidebar {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .apply-card, .company-card, .similar-vacancies {
+        background-color: white;
+        border-radius: 15px;
+        padding: 1.5rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .apply-card h3, .company-card h3, .similar-vacancies h3 {
+        color: var(--dark-color);
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+    }
+    
+    .apply-card p {
+        color: var(--text-color);
+        margin-bottom: 1.5rem;
+    }
+    
+    .apply-btn {
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+    
+    .deadline {
+        font-size: 0.9rem;
+        color: var(--text-color);
+        text-align: center;
+    }
+    
+    .company-info {
+        margin-bottom: 1rem;
+    }
+    
+    .info-item {
+        margin-bottom: 0.8rem;
+    }
+    
+    .info-label {
+        font-weight: 600;
+        color: var(--dark-color);
+        margin-right: 0.5rem;
+    }
+    
+    .info-value {
+        color: var(--text-color);
+    }
+    
+    .company-description {
+        color: var(--text-color);
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+    
+    .similar-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .similar-item {
+        padding: 1rem;
+        border: 1px solid #f1f2f6;
+        border-radius: 8px;
+    }
+    
+    .similar-item h4 {
+        color: var(--dark-color);
+        margin-bottom: 0.3rem;
+    }
+    
+    .similar-item .company {
+        color: var(--text-color);
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .view-link {
+        color: var(--primary-color);
+        font-size: 0.9rem;
+        text-decoration: none;
+    }
+    
+    .view-link:hover {
+        text-decoration: underline;
+    }
+</style>
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Apply button functionality
+        const applyBtn = document.querySelector('.apply-btn');
+        if (applyBtn) {
+            applyBtn.addEventListener('click', function() {
+                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Jo\'natilmoqda...';
+                
+                // Simulate application process
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fas fa-check"></i> Ariza Jo\'natildi!';
+                    this.classList.remove('btn-primary');
+                    this.classList.add('btn-success');
+                    this.disabled = true;
+                }, 1500);
+            });
+        }
+    });
+</script>
+{% endblock %}
+{% endblock %}

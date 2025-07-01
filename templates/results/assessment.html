@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="assessment-container">
+    <div class="assessment-results animate-slideLeft">
+        <div class="results-header">
+            <h1>Test Natijalari</h1>
+            <p>Quyida sizning bilim darajangiz va sizga mos keladigan vakansiyalar ko'rsatilgan</p>
+        </div>
+        
+        <div class="score-section">
+            <div class="score-circle">
+                <div class="circle-progress" data-score="{{ score }}%">
+                    <span>{{ score }}%</span>
+                </div>
+            </div>
+            <div class="score-details">
+                <h3>{{ category.name }}</h3>
+                <p>{{ assessment_message }}</p>
+                <div class="skill-level">
+                    <span>Bilim darajangiz:</span>
+                    <div class="level-bars">
+                        {% for i in 5|times %}
+                        <div class="level-bar {% if i <= skill_level %}active{% endif %}"></div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="recommendations">
+            <h3>Tavsiyalar</h3>
+            <ul>
+                {% for recommendation in recommendations %}
+                <li>{{ recommendation }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        
+        <div class="actions">
+            <a href="{% url 'generate_cv' %}" class="btn-primary">CV Yaratish</a>
+            <a href="#vacancies" class="btn-secondary">Vakansiyalarni Ko'rish</a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .assessment-container {
+        max-width: 1200px;
+        margin: 100px auto 50px;
+        padding: 2rem;
+    }
+    
+    .results-header {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+    
+    .results-header h1 {
+        color: var(--dark-color);
+        margin-bottom: 1rem;
+    }
+    
+    .score-section {
+        display: flex;
+        align-items: center;
+        background-color: white;
+        border-radius: 15px;
+        padding: 2rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        margin-bottom: 2rem;
+    }
+    
+    .score-circle {
+        position: relative;
+        width: 150px;
+        height: 150px;
+        margin-right: 2rem;
+    }
+    
+    .circle-progress {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: conic-gradient(var(--primary-color) {{ score }}%, #f1f2f6 {{ score }}%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .circle-progress span {
+        background-color: white;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+    
+    .score-details h3 {
+        color: var(--dark-color);
+        margin-bottom: 0.5rem;
+    }
+    
+    .skill-level {
+        margin-top: 1rem;
+    }
+    
+    .skill-level span {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: var(--text-color);
+    }
+    
+    .level-bars {
+        display: flex;
+        gap: 5px;
+    }
+    
+    .level-bar {
+        width: 20px;
+        height: 5px;
+        background-color: #e0e0e0;
+        border-radius: 2px;
+    }
+    
+    .level-bar.active {
+        background-color: var(--primary-color);
+    }
+    
+    .recommendations {
+        background-color: white;
+        border-radius: 15px;
+        padding: 2rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        margin-bottom: 2rem;
+    }
+    
+    .recommendations h3 {
+        color: var(--dark-color);
+        margin-bottom: 1rem;
+    }
+    
+    .recommendations ul {
+        list-style-type: none;
+    }
+    
+    .recommendations li {
+        padding: 0.5rem 0;
+        color: var(--text-color);
+        position: relative;
+        padding-left: 1.5rem;
+    }
+    
+    .recommendations li::before {
+        content: '•';
+        color: var(--primary-color);
+        font-size: 1.5rem;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    
+    .actions {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+    }
+</style>
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Animate progress circle
+        const circle = document.querySelector('.circle-progress');
+        const score = circle.dataset.score.replace('%', '');
+        let current = 0;
+        
+        const interval = setInterval(() => {
+            if (current >= score) {
+                clearInterval(interval);
+                return;
+            }
+            current++;
+            circle.style.background = `conic-gradient(var(--primary-color) ${current}%, #f1f2f6 ${current}%)`;
+            circle.querySelector('span').textContent = `${current}%`;
+        }, 20);
+    });
+</script>
+{% endblock %}
+{% endblock %}

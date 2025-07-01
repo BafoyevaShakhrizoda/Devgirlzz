@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayollar Karera Platformasi</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animations.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo">
+            <span class="brand-name">AyollarIT</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="{% url 'home' %}">Bosh Sahifa</a></li>
+            <li><a href="#categories">Kategoriyalar</a></li>
+            <li><a href="#vacancies">Vakansiyalar</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'logout' %}">Chiqish</a></li>
+            {% else %}
+                <li><a href="{% url 'login' %}">Kirish</a></li>
+                <li><a href="{% url 'register' %}">Ro'yxatdan o'tish</a></li>
+            {% endif %}
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>© 2025 Ayollar Karera Platformasi. Barcha huquqlar himoyalangan.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{% static 'js/main.js' %}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

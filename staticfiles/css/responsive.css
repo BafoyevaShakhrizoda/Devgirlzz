@@ -1,0 +1,85 @@
+/* Small devices (phones, 576px and down) */
+@media (max-width: 576px) {
+    .hero-title {
+        font-size: 1.8rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .btn-primary, .btn-secondary {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .auth-card {
+        padding: 1.5rem;
+    }
+    
+    .test-container {
+        padding: 1rem;
+        margin: 80px auto 30px;
+    }
+    
+    .question-text {
+        font-size: 1.1rem;
+    }
+    
+    .option {
+        padding: 0.8rem;
+    }
+}
+
+/* Medium devices (tablets, 768px and down) */
+@media (max-width: 768px) {
+    .categories-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .steps-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .step {
+        margin-bottom: 1.5rem;
+        max-width: 100%;
+    }
+    
+    .cv-container, .assessment-container {
+        flex-direction: column;
+    }
+    
+    .cv-preview, .assessment-results {
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+    
+    .vacancy-card {
+        flex-direction: column;
+    }
+    
+    .vacancy-info {
+        margin-left: 0;
+        margin-top: 1rem;
+    }
+}
+
+/* Large devices (desktops, 992px and down) */
+@media (max-width: 992px) {
+    .container {
+        padding: 0 2rem;
+    }
+    
+    .vacancy-card {
+        padding: 1.5rem;
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and down) */
+@media (max-width: 1200px) {
+    .hero-content {
+        max-width: 700px;
+    }
+}
