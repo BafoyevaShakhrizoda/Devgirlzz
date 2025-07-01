@@ -1,3 +1,6 @@
+{% load static %}
+{% load i18n %}
+
 <!DOCTYPE html>
 <html lang="uz">
 <head>
@@ -7,18 +10,20 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" href="{% static 'css/animations.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <nav class="navbar">
         <div class="logo-container">
             <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo">
-            <span class="brand-name">AyollarIT</span>
+            <span class="brand-name">DevGirlzz</span>
         </div>
         <ul class="nav-links">
             <li><a href="{% url 'home' %}">Bosh Sahifa</a></li>
-            <li><a href="#categories">Kategoriyalar</a></li>
-            <li><a href="#vacancies">Vakansiyalar</a></li>
+            <li><a href="{% url 'category_list' %}">Kategoriyalar</a></li>
+            <li><a href="{% url 'vacancy_list' %}">Vakansiyalar</a></li>
             {% if user.is_authenticated %}
+                <li><a href="{% url 'profile' %}">Profil</a></li>
                 <li><a href="{% url 'logout' %}">Chiqish</a></li>
             {% else %}
                 <li><a href="{% url 'login' %}">Kirish</a></li>
@@ -33,6 +38,14 @@
     </nav>
 
     <div class="content">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        
         {% block content %}
         {% endblock %}
     </div>
